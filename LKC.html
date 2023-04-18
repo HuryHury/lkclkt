@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKT e LKC</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color:#191919;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 15px;
+}
+
+section h1 {
+    margin: 10px 0px 20px 0px;
+    font-size: 2rem;
+
+}
+
+section label {
+    display: block;
+    text-align: center;
+}
+
+section select {
+    margin: 10px 0px 10px 0px;
+    padding: 0.3rem;
+    
+    
+}
+
+.none {
+    display: none;
+    text-align: center;
+}
+
+#resultado {
+    display: block;
+    text-align: center;
+    
+}
+
+.resultado {
+    display: block;
+    
+}
+
+
+.customizar-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    
+}
+
+
+#choicepos{
+    background-color: white;
+  color: black;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  outline: none;
+  text-align: center;
+}
+
+#choicenegs{
+    background-color: white;
+  color: black;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  outline: none;
+  text-align: center;
+}
+
+
+#obs {
+    margin-top: 1rem;
+    font-size: .9em;
+    text-align: center;
+}
+h1{
+    text-align: center;
+}
+
+    </style>
+</head>
+
+<body>
+
+    
+    <section>
+        <h1 >Calculadora Lei de Kirchoff <br>   das Correntes(LKC)</h1>
+        <label for="choicepos">Selecione o <strong>número</strong> de Correntes de Entrada:</label>
+        <div class="customizar-select">
+            <select  id="choicepos">
+                <option selected value="" disabled>Nº de Correntes</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        
+        <!-- <i>Digite os valores de saída na forma negativa</i> -->
+        <form action="">
+            <div>
+                <p id="positivo">
+                </p>
+            </div>
+        </form>
+        <label for="choicenegs">Selecione o  <strong>número</strong> de Correntes de Saída:</label>
+        <div class="customizar-select">
+            <select id="choicenegs">
+                <option selected value="" disabled>Nº de Correntes</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        
+        <form action="">
+            <div>
+                <p id="negativo">
+                </p>
+            </div>
+            <div>
+                <label for="isoma" class="none">RESULTADO POSITIVO:</label>
+                <p id="isoma" class="none"></p>
+            </div>
+            <div>
+                <label for="isomaneg" class="none">RESULTADO NEGATIVO:</label>
+                <p id="isomaneg" class="none"></p>
+            </div>
+            <div>
+                <label for="resultado" class="resultado">RESULTADO:</label>
+                <p id="resultado"></p>
+            </div>
+            <div>
+                <p id="obs">OBS: Atualize a pagina para calcular novamente</p>
+            </div>
+        </form>
+    </section>
+
+
+    <script>
+
+
+        var positive = 0;
+        var negative = 0;
+        var selectpos = document.querySelector('#choicepos');
+        var selectneg = document.querySelector('#choicenegs');
+
+
+
+        selectpos.addEventListener('change', SetPos);
+        selectneg.addEventListener('change', SetNegs);
+
+        function SetPos() {
+
+            var choicepose = choicepos.value;
+
+
+            if (choicepose === '2') {
+                document.querySelector('#positivo').innerHTML = '<input type="number" name="p1" id="ip1" required oninput="soma()"> <br> <br> <input type="number" name="p2" id="ip2" required oninput="soma()">'
+            } else if (choicepose === '1') {
+                document.querySelector('#positivo').innerHTML = '<input type="number" name="p1" id="ip1" required oninput="soma()">';
+            } else if (choicepose === '3') {
+                document.querySelector('#positivo').innerHTML = '<input type="number" name="p1" id="ip1" required oninput="soma()"> <br> <br> <input type="number" name="p2" id="ip2" required oninput="soma()"> <br> <br>  <input type="number" name="p3" id="ip3" required oninput="soma()">';
+            }
+            else if (choicepose === '4') {
+                document.querySelector('#positivo').innerHTML = '<input type="number" name="p1" id="ip1" required oninput="soma()"> <br> <br> <input type="number" name="p2" id="ip2" required oninput="soma()"> <br> <br>  <input type="number" name="p3" id="ip3" required oninput="soma()"> <br> <br>  <input type="number" name="p4" id="ip4" required oninput="soma()">';
+            } else if (choicepose === '5') {
+                document.querySelector('#positivo').innerHTML = '<input type="number" name="p1" id="ip1" required oninput="soma()"> <br> <br> <input type="number" name="p2" id="ip2" required oninput="soma()"> <br> <br>  <input type="number" name="p3" id="ip3" required oninput="soma()"> <br> <br>  <input type="number" name="p4" id="ip4" required oninput="soma()"> <br> <br>  <input type="number" name="p5" id="ip5" required oninput="soma()">';
+            }
+
+
+        }
+
+        function SetNegs() {
+
+            var choicenega = choicenegs.value;
+
+
+            if (choicenega === '2') {
+                document.querySelector('#negativo').innerHTML = '<input type="number" name="n2" id="in2" required oninput="somanegative()"> <br> <br> <input type="number" name="n1" id="in1" required oninput="somanegativo()">';
+            } else if (choicenega === '1') {
+                document.querySelector('#negativo').innerHTML = '<input type="number" name="n1" id="in1" required oninput="somanegative()">';
+            } else if (choicenega === '3') {
+                document.querySelector('#negativo').innerHTML = '<input type="number" name="n1" id="in1" required oninput="somanegative()"> <br> <br> <input type="number" name="n2" id="in2" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n3" id="in3" required oninput="somanegativo()" oninput="somanegativo()">';
+            } else if (choicenega === '4') {
+                document.querySelector('#negativo').innerHTML = '<input type="number" name="n1" id="in1" required oninput="somanegative()"> <br> <br> <input type="number" name="n2" id="in2" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n3" id="in3" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n4" id="in4" required oninput="somanegativo()">';
+            } else if (choicenega === '5') {
+                document.querySelector('#negativo').innerHTML = '<input type="number" name="n1" id="in1" required oninput="somanegative()"> <br> <br> <input type="number" name="n2" id="in2" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n3" id="in3" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n4" id="in4" required oninput="somanegativo()"> <br> <br>  <input type="number" name="n5" id="in5" required oninput="somanegativo()">';
+            }
+
+        }
+
+
+        function soma() {
+
+
+            var choicepose = choicepos.value;
+
+            if (choicepose === '1') {
+                positive = Number(ip1.value);
+            } else if (choicepose === '2') {
+                positive = Number(ip1.value) + Number(ip2.value);
+            } else if (choicepose === '3') {
+                positive = Number(ip1.value) + Number(ip2.value) + Number(ip3.value);
+            } else if (choicepose === '4') {
+                positive = Number(ip1.value) + Number(ip2.value) + Number(ip3.value) + Number(ip4.value);
+            } else if (choicepose === '5') {
+                positive = Number(ip1.value) + Number(ip2.value) + Number(ip3.value) + Number(ip4.value) + Number(ip5.value);
+            }
+
+
+            isoma.innerHTML = positive;
+        }
+
+
+        function somanegativo() {
+
+
+            var choicenega = choicenegs.value;
+
+            if (choicenega === '2') {
+                negative = Number(in1.value) + Number(in2.value);
+            } else if (choicenega === '1') {
+                negative = Number(in1.value);
+            } else if (choicenega === '3') {
+                negative = Number(in1.value) + Number(in2.value) + Number(in3.value);
+            } else if (choicenega === '4') {
+                negative = Number(in1.value) + Number(in2.value) + Number(in3.value) + Number(in4.value);
+            } else if (choicenega === '5') {
+                negative = Number(in1.value) + Number(in2.value) + Number(in3.value) + Number(in4.value) + Number(in5.value);
+            }
+
+            var result = positive - negative;
+            result = Math.abs(result);
+            isomaneg.innerHTML = negative;
+            resultado.innerHTML = result;
+        }
+
+
+    </script>
+</body>
+
+</html>

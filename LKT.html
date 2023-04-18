@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Lei de Kirchhoff das Tensões</title>
+
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: 'Inter', Arial, Helvetica, sans-serif;
+		}
+
+		body {
+			background-color: #191919;
+			height: 100vh;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		section {
+			background-color: white;
+			padding: 40px;
+			box-shadow: 0px 0px 5px black;
+			border-radius: 15px;
+		}
+
+		section h1 {
+			margin: 10px 0px 20px 0px;
+			font-size: 2rem;
+
+		}
+
+		section label {
+			display: block;
+			text-align: center;
+		}
+
+		section select {
+			margin: 10px 0px 10px 0px;
+			padding: 0.3rem;
+
+
+		}
+
+		.none {
+			display: none;
+			text-align: center;
+		}
+
+		#resultado {
+			display: block;
+			text-align: center;
+
+		}
+
+		.resultado {
+			display: block;
+
+		}
+
+
+		.customizar-select {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 1rem;
+
+		}
+
+
+		#choicepos {
+			background-color: white;
+			color: black;
+			padding: 10px;
+			width: 250px;
+			border: none;
+			font-size: 1.2rem;
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+			outline: none;
+			text-align: center;
+		}
+
+		#choicenegs {
+			background-color: white;
+			color: black;
+			padding: 10px;
+			width: 250px;
+			border: none;
+			font-size: 1.2rem;
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+			outline: none;
+			text-align: center;
+		}
+
+
+		#obs {
+			margin-top: 1rem;
+			font-size: .9em;
+			text-align: center;
+		}
+		p{
+			text-align: center;
+		}
+		h1 {
+			text-align: center;
+		}
+
+		#right{
+			margin-left: 500px;
+		}
+
+		div{
+			display: flex;
+		}
+		#space{
+			width: 60px;
+		}
+
+		#but{
+			size: 40px;
+			display: flex;
+			margin-left: 44%;
+			margin-top:20px;
+	
+		}
+		button{
+			color: black;
+			width: 70px;
+			height: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<section>
+	<h1>Lei de Kirchhoff das Tensões</h1>
+	<p>Insira os valores das resistências e das fontes de tensão:</p>
+
+	<br>
+
+	<div>
+	<table>
+		<tr>
+			<th>Resistência</th>
+			<th id="right">Valor (Ohms)</th>
+		</tr>
+		<tr>
+			<td>R1</td>
+			<td><input type="number" id="r1"></td>
+		</tr>
+		<tr>
+			<td>R2</td>
+			<td><input type="number" id="r2"></td>
+		</tr>
+		<tr>
+			<td>R3</td>
+			<td><input type="number" id="r3"></td>
+		</tr>
+	</table>
+	<div id="space">
+		<p> </p>
+	</div>
+	<table>
+		<tr>
+			<th>Fonte de Tensão</th>
+			<th>Valor (Volts)</th>
+		</tr>
+		<tr>
+			<td>V1</td>
+			<td><input type="number" id="v1"></td>
+		</tr>
+		<tr>
+			<td>V2</td>
+			<td><input type="number" id="v2"></td>
+		</tr>
+	</table>
+
+
+</div>
+	<div id="but">
+	<button onclick="calcular()">Calcular</button>
+	<p id="resultado"></p>
+    </div>
+
+	</section>
+
+
+
+	<script>
+		function calcular() {
+			// Obter os valores das resistências e fontes de tensão
+			var r1 = document.getElementById("r1").value;
+			var r2 = document.getElementById("r2").value;
+			var r3 = document.getElementById("r3").value;
+			var v1 = document.getElementById("v1").value;
+			var v2 = document.getElementById("v2").value;
+
+			// Calcular as tensões nos nós do circuito
+			var vAB = (v1 * r2 + v2 * r1) / (r1 + r2 + r3);
+			var vBC = (v1 * r3 + v2 * r2) / (r1 + r2 + r3);
+			var vCA = (v1 * r1 + v2 * r3) / (r1 + r2 + r3);
+
+			// Exibir o resultado na página
+			document.getElementById("resultado").innerHTML = "Tensões: VAB = " + vAB.toFixed(2) + " V, VBC = " + vBC.toFixed(2) + " V, VCA = " + vCA.toFixed(2) + " V.";
+		}
+	</script>
+</body>
+
+</html>
